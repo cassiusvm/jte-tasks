@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Controller
 public class TaskController {
 
@@ -24,7 +26,7 @@ public class TaskController {
 
     @PostMapping("/add-task")
     public String addTask(@RequestParam String description, Model model) {
-        Task newTask = new Task(description);
+        Task newTask = new Task(UUID.randomUUID().toString(),description);
         repository.create(newTask);
         model.addAttribute("task", newTask);
         return "task-row";

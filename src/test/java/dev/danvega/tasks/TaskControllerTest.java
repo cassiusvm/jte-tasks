@@ -37,7 +37,7 @@ public class TaskControllerTest {
 
         Task addedTask = (Task) result.getModelAndView().getModel().get("task");
         assertNotNull(addedTask);
-        assertEquals(newTaskDescription, addedTask.getDescription());
+        assertEquals(newTaskDescription, addedTask.description());
     }
 
     @Test
@@ -51,11 +51,11 @@ public class TaskControllerTest {
         Task addedTask = (Task) addResult.getModelAndView().getModel().get("task");
 
         // Now, delete the task
-        mockMvc.perform(delete("/delete-task/" + addedTask.getId()))
+        mockMvc.perform(delete("/delete-task/" + addedTask.id()))
                 .andExpect(status().isOk());
 
         // Try to delete the same task again, should fail
-        mockMvc.perform(delete("/delete-task/" + addedTask.getId()))
+        mockMvc.perform(delete("/delete-task/" + addedTask.id()))
                 .andExpect(status().isOk());
     }
 }
